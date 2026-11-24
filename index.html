@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Saran Arah Hadap Rumah Feng Shui</title>
+<style>
+:root{--bg:#faf7f2;--card:#fff;--tx:#2b2a28;--mut:#6b675f;--ac:#b5543a;--bd:#e6dfd3;--ok:#2e7d5b;--no:#b3392f;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1b19;--card:#262421;--tx:#f0ece4;--mut:#a9a498;--ac:#e08a6e;--bd:#3a3732;--ok:#6fcf9f;--no:#f08a80;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+main{max-width:640px;margin:0 auto;padding:18px 16px 40px}
+h1{font-size:1.4rem;margin:.2rem 0}
+.sub{color:var(--mut);margin:0 0 16px;font-size:.95rem}
+.tabs{display:flex;gap:8px;margin-bottom:14px}
+.tabs button{flex:1;padding:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;font-size:.95rem;cursor:pointer}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:14px}
+label{display:block;font-weight:600;margin:10px 0 6px;font-size:.92rem}
+select,input{width:100%;padding:11px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font-size:1rem}
+.go{width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:var(--ac);color:#fff;font-size:1rem;font-weight:600;cursor:pointer}
+.hide{display:none}
+h2{font-size:1.1rem;margin:0 0 6px}
+h3{font-size:.95rem;margin:14px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:flex;align-items:center;gap:6px;border:1px solid var(--bd);border-radius:999px;padding:4px 10px 4px 5px;font-size:.88rem}
+.chip i{width:20px;height:20px;border-radius:50%;border:1px solid rgba(0,0,0,.2);display:inline-block}
+.ok{color:var(--ok)}.no{color:var(--no)}
+ul{margin:6px 0;padding-left:20px}
+.dir{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dir div{border:1px solid var(--bd);border-radius:10px;padding:10px;font-size:.9rem}
+.dir b{display:block}
+small,.note{color:var(--mut);font-size:.82rem}
+</style>
+</head>
+<body>
+<main>
+<h1>🧭 Saran Arah Hadap Rumah</h1>
+<p class="sub">Menurut prinsip Feng Shui: warna cat, tips, dan arah hadap terbaik.</p>
+
+<div class="tabs">
+<button id="t1" class="on" type="button">Arah hadap → warna cat</button>
+<button id="t2" type="button">Cari arah hadap terbaik</button>
+</div>
+
+<div id="p1" class="card">
+<label for="arah">Rumah saya menghadap ke…</label>
+<select id="arah"></select>
+<button class="go" id="go1" type="button">Lihat saran</button>
+</div>
+
+<div id="p2" class="card hide">
+<label for="thn">Tahun lahir</label>
+<input id="thn" type="number" inputmode="numeric" min="1900" max="2100" placeholder="contoh: 1985">
+<label for="gen">Jenis kelamin</label>
+<select id="gen"><option value="L">Laki-laki</option><option value="P">Perempuan</option></select>
+<button class="go" id="go2" type="button">Hitung arah terbaik</button>
+</div>
+
+<div id="out"></div>
+<p class="note">Feng Shui adalah tradisi kepercayaan, bukan ilmu pasti. Gunakan sebagai inspirasi, sesuaikan dengan selera dan kondisi rumah.</p>
+</main>
+
+<script>
+var D={
+"Utara":{u:"Air",c:[["Biru tua","#1f3f66"],["Biru muda","#9cc3e6"],["Abu muda","#d0d3d8"],["Putih","#f5f5f5"]],h:"Kuning tua, cokelat tanah pekat",t:"Logam (putih, abu) memperkuat unsur Air. Tambahkan elemen air seperti kolam kecil atau cermin."},
+"Timur Laut":{u:"Tanah",c:[["Terracotta","#c2674a"],["Krem","#efe3c8"],["Kuning lembut","#f0d98a"],["Cokelat muda","#b98d62"]],h:"Hijau tua pekat",t:"Merah muda dan terracotta menguatkan Tanah. Cocok untuk keramik, batu alam, dan tanaman pot tanah liat."},
+"Timur":{u:"Kayu",c:[["Hijau daun","#6aa56a"],["Hijau mint","#b7dcc0"],["Biru muda","#9cc3e6"],["Cokelat kayu","#a37a52"]],h:"Putih mengilap, abu logam",t:"Air (biru) menyuburkan Kayu. Perbanyak tanaman hidup dan furnitur kayu."},
+"Tenggara":{u:"Kayu",c:[["Hijau muda","#98c995"],["Teal","#4a9a98"],["Biru muda","#9cc3e6"],["Cokelat kayu","#a37a52"]],h:"Putih mengilap, abu logam",t:"Sama seperti Timur: Kayu dan Air saling mendukung. Cocok untuk taman depan yang rimbun."},
+"Selatan":{u:"Api",c:[["Terracotta","#c2674a"],["Oranye lembut","#eba26b"],["Merah muda","#e8a0a0"],["Hijau muda","#98c995"]],h:"Biru tua, hitam",t:"Kayu (hijau) memberi energi pada Api. Pakai merah dan oranye sebagai aksen, bukan seluruh dinding."},
+"Barat Daya":{u:"Tanah",c:[["Kuning lembut","#f0d98a"],["Krem","#efe3c8"],["Terracotta","#c2674a"],["Cokelat muda","#b98d62"]],h:"Hijau tua, biru tua",t:"Warna bumi menstabilkan rumah. Tambahkan keramik, batu, dan pot tanah liat."},
+"Barat":{u:"Logam",c:[["Abu muda","#d0d3d8"],["Putih","#f5f5f5"],["Terracotta","#c2674a"],["Krem","#efe3c8"]],h:"Merah menyala, oranye terang",t:"Tanah menghasilkan Logam, jadi terracotta dan krem sangat mendukung. Abu muda dan putih menguatkan unsur Logam. Aksen logam seperti gagang dan lampu berwarna emas atau perak cocok."},
+"Barat Laut":{u:"Logam",c:[["Abu muda","#d0d3d8"],["Putih","#f5f5f5"],["Emas lembut","#d9bf7a"],["Krem","#efe3c8"]],h:"Merah menyala, oranye terang",t:"Pakai nuansa netral dan elegan. Aksen logam di pintu dan pagar menguatkan energi."}
+};
+var K={
+1:["Tenggara","Timur","Selatan","Utara"],3:["Selatan","Utara","Tenggara","Timur"],4:["Utara","Selatan","Timur","Tenggara"],9:["Timur","Tenggara","Utara","Selatan"],
+2:["Timur Laut","Barat","Barat Laut","Barat Daya"],6:["Barat","Timur Laut","Barat Daya","Barat Laut"],7:["Barat Laut","Barat Daya","Timur Laut","Barat"],8:["Barat Daya","Barat Laut","Barat","Timur Laut"]
+};
+var L=[["Sheng Qi","Rezeki &amp; kemakmuran"],["Tian Yi","Kesehatan"],["Yan Nian","Keharmonisan &amp; hubungan"],["Fu Wei","Ketenangan &amp; stabilitas"]];
+var sel=document.getElementById("arah"),out=document.getElementById("out");
+Object.keys(D).forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=k;if(k==="Barat")o.selected=true;sel.appendChild(o)});
+
+function chips(a){return '<div class="chips">'+a.map(function(c){return '<span class="chip"><i style="background:'+c[1]+'"></i>'+c[0]+'</span>'}).join("")+'</div>'}
+function warna(k){
+var d=D[k];
+return '<div class="card"><h2>Rumah hadap '+k+'</h2><small>Unsur: '+d.u+'</small>'+
+'<h3 class="ok">✔ Warna cat yang disarankan</h3>'+chips(d.c)+
+'<h3 class="no">✘ Sebaiknya dihindari</h3><div>'+d.h+'</div>'+
+'<h3>💡 Tips</h3><div>'+d.t+'</div></div>';
+}
+function rd(n){while(n>9){n=String(n).split("").reduce(function(a,b){return a+ +b},0)}return n}
+function showWarna(){out.innerHTML=warna(sel.value)}
+function hitung(){
+var y=parseInt(document.getElementById("thn").value,10),g=document.getElementById("gen").value;
+if(!y||y<1900||y>2100){out.innerHTML='<div class="card">Masukkan tahun lahir yang valid.</div>';return}
+var s=rd(y),k;
+if(y<2000){k=g==="L"?rd(11-s):rd(s+4)}else{k=g==="L"?rd(9-s):rd(s+6)}
+if(k===0)k=9;
+if(k===5)k=(g==="L")?2:8;
+var grup=[1,3,4,9].indexOf(k)>-1?"Grup Timur":"Grup Barat";
+var a=K[k];
+var h='<div class="card"><h2>Angka Kua kamu: '+k+'</h2><small>'+grup+'</small><h3>Arah hadap terbaik</h3><div class="dir">';
+for(var i=0;i<4;i++){h+='<div><b>'+a[i]+'</b>'+L[i][0]+'<br><small>'+L[i][1]+'</small></div>'}
+h+='</div><p class="note">Urutan dari terbaik: '+a[0]+' lalu '+a[1]+', '+a[2]+', '+a[3]+'. Ketuk arah di bawah untuk melihat saran warna cat.</p>';
+h+='<div class="chips">'+a.map(function(x){return '<button class="chip" type="button" data-d="'+x+'" style="background:var(--bg);color:var(--tx);cursor:pointer">'+x+'</button>'}).join("")+'</div></div><div id="det"></div>';
+out.innerHTML=h;
+Array.prototype.forEach.call(out.querySelectorAll("[data-d]"),function(b){b.addEventListener("click",function(){document.getElementById("det").innerHTML=warna(b.getAttribute("data-d"))})});
+}
+function tab(n){
+document.getElementById("p1").classList.toggle("hide",n!==1);
+document.getElementById("p2").classList.toggle("hide",n!==2);
+document.getElementById("t1").classList.toggle("on",n===1);
+document.getElementById("t2").classList.toggle("on",n===2);
+out.innerHTML="";
+}
+document.getElementById("go1").addEventListener("click",showWarna);
+document.getElementById("go2").addEventListener("click",hitung);
+document.getElementById("t1").addEventListener("click",function(){tab(1)});
+document.getElementById("t2").addEventListener("click",function(){tab(2)});
+</script>
+</body>
+</html>
