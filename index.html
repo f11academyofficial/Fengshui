@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Saran Arah Hadap Rumah Feng Shui</title>
+<meta name="description" content="Analisa Feng Shui: warna cat sesuai arah hadap rumah, angka Kua, arah terbaik, dan tata letak ruang.">
+<meta property="og:title" content="Saran Arah Hadap Rumah Feng Shui">
+<meta property="og:description" content="Cek warna cat, arah hadap terbaik, dan tata letak ruang berdasarkan prinsip Feng Shui.">
 <style>
 :root{--bg:#faf7f2;--card:#fff;--tx:#2b2a28;--mut:#6b675f;--ac:#b5543a;--bd:#e6dfd3;--ok:#2e7d5b;--no:#b3392f;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1b19;--card:#262421;--tx:#f0ece4;--mut:#a9a498;--ac:#e08a6e;--bd:#3a3732;--ok:#6fcf9f;--no:#f08a80;color-scheme:dark}}
@@ -30,13 +33,25 @@ ul{margin:6px 0;padding-left:20px}
 .dir{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .dir div{border:1px solid var(--bd);border-radius:10px;padding:10px;font-size:.9rem}
 .dir b{display:block}
+.dir.bad div{opacity:.9;border-style:dashed}
 small,.note{color:var(--mut);font-size:.82rem}
+.kv{margin:8px 0;font-size:.93rem}.kv b{display:block;font-size:.85rem;color:var(--mut);font-weight:600}
+.box{border-left:3px solid var(--ac);padding:6px 10px;margin:12px 0;background:var(--bg);border-radius:0 8px 8px 0;font-size:.92rem}
+.share{display:flex;gap:8px;margin:0 0 14px}
+.share button{flex:1;padding:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;font-size:.9rem;cursor:pointer}
+.share button:first-child{background:var(--ac);color:#fff;border-color:var(--ac);font-weight:600}
+details{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin-bottom:8px}
+summary{cursor:pointer;font-weight:600;font-size:.95rem}
+details p,details li{font-size:.9rem;color:var(--tx)}
+h2.sec{margin:22px 0 10px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:.88rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
 </style>
 </head>
 <body>
 <main>
 <h1>🧭 Saran Arah Hadap Rumah</h1>
-<p class="sub">Menurut prinsip Feng Shui: warna cat, tips, dan arah hadap terbaik.</p>
+<p class="sub">Menurut prinsip Feng Shui: warna cat, tata letak ruang, dan arah hadap terbaik, lengkap dengan penjelasan unsur dan area kehidupan.</p>
 
 <div class="tabs">
 <button id="t1" class="on" type="button">Arah hadap → warna cat</button>
@@ -46,65 +61,131 @@ small,.note{color:var(--mut);font-size:.82rem}
 <div id="p1" class="card">
 <label for="arah">Rumah saya menghadap ke…</label>
 <select id="arah"></select>
-<button class="go" id="go1" type="button">Lihat saran</button>
+<button class="go" id="go1" type="button">Lihat analisa</button>
 </div>
 
 <div id="p2" class="card hide">
 <label for="thn">Tahun lahir</label>
 <input id="thn" type="number" inputmode="numeric" min="1900" max="2100" placeholder="contoh: 1985">
-<label for="gen">Jenis kelamin</label>
+<label for="gen">Jenis kelamin (dipakai untuk rumus Kua)</label>
 <select id="gen"><option value="L">Laki-laki</option><option value="P">Perempuan</option></select>
+<label for="rmh">Arah hadap rumah saat ini (opsional)</label>
+<select id="rmh"></select>
 <button class="go" id="go2" type="button">Hitung arah terbaik</button>
 </div>
 
 <div id="out"></div>
+
+<div class="share" id="sh">
+<button type="button" data-sh="native">📤 Bagikan</button>
+<button type="button" data-sh="wa">WhatsApp</button>
+<button type="button" data-sh="copy">Salin</button>
+</div>
+
 <p class="note">Feng Shui adalah tradisi kepercayaan, bukan ilmu pasti. Gunakan sebagai inspirasi, sesuaikan dengan selera dan kondisi rumah.</p>
+
+<h2 class="sec">Cara membaca &amp; faktor lain</h2>
+<details><summary>Bagaimana hasil ini disusun?</summary>
+<p>Hasil memadukan tiga lapisan: (1) <b>unsur</b> arah (Kayu, Api, Tanah, Logam, Air) dan siklus saling mendukung antarunsur, (2) <b>Bagua</b>, yaitu pembagian area kehidupan, dan (3) <b>Delapan Rumah (Ba Zhai)</b> berdasarkan angka Kua pribadi. Ketiganya adalah kerangka tradisi, jadi baca sebagai pertimbangan, bukan vonis.</p></details>
+<details><summary>Siklus unsur singkat</summary>
+<p><b>Saling menghasilkan:</b> Kayu → Api → Tanah → Logam → Air → Kayu.<br><b>Saling mengendalikan:</b> Kayu menembus Tanah, Tanah membendung Air, Air memadamkan Api, Api melebur Logam, Logam memotong Kayu.<br>Gunakan warna penghasil sebagai warna utama dan warna pengendali secukupnya. Rumus mudah: 60% warna dasar, 30% pendamping, 10% aksen.</p></details>
+<details><summary>Hal lain yang ikut menentukan kenyamanan rumah</summary>
+<ul><li>Cahaya alami dan sirkulasi udara di setiap ruang.</li><li>Jalan lurus atau pertigaan yang menuju pintu utama (disebut “tusuk sate”): redam dengan pagar, taman, atau jarak.</li><li>Pintu utama yang lega, terang, dan mudah dibuka. Hindari pohon besar tepat di depannya.</li><li>Letak kamar mandi, dapur, dan tangga terhadap pintu utama dan kamar tidur.</li><li>Kerapian: barang rusak, tumpukan, dan kabel kusut menghambat ruang gerak sehari-hari.</li></ul></details>
+
+<h2 class="sec">FAQ privasi</h2>
+<details><summary>Apakah data saya disimpan atau dikirim?</summary>
+<p>Tidak oleh halaman ini. Perhitungan berjalan di browser kamu. Tahun lahir, jenis kelamin, dan pilihan arah tidak dikirim ke server pembuat, tidak disimpan, dan tidak dipasang cookie atau pelacak di versi halaman ini.</p></details>
+<details><summary>Apakah ada pihak lain yang bisa mencatat kunjungan?</summary>
+<p>Halaman ini dihosting di layanan pihak ketiga (GitHub Pages). Penyedia hosting dapat mencatat data kunjungan standar seperti alamat IP sesuai kebijakan mereka sendiri, di luar kendali halaman ini.</p></details>
+<details><summary>Apa yang ikut terbagikan saat saya menekan tombol Bagikan?</summary>
+<p>Hanya ringkasan hasil (misalnya arah hadap dan warna, atau angka Kua dan arah terbaik) beserta tautan halaman. Tahun lahir dan jenis kelamin tidak ikut dibagikan. Setelah dibagikan, data mengikuti aturan aplikasi tujuan, misalnya WhatsApp.</p></details>
+<details><summary>Mengapa jenis kelamin ditanyakan?</summary>
+<p>Rumus angka Kua dalam tradisi ini berbeda untuk laki-laki dan perempuan. Isian ini hanya untuk perhitungan dan tidak diminta untuk tujuan lain.</p></details>
+<details><summary>Bagaimana cara menghapus jejak input saya?</summary>
+<p>Muat ulang atau tutup halaman. Tidak ada data yang tersimpan di perangkat, jadi tidak ada yang perlu dihapus.</p></details>
+
+<h2 class="sec">Kebijakan penggunaan</h2>
+<details><summary>Tujuan &amp; batasan</summary>
+<ul><li>Halaman ini berisi informasi budaya dan inspirasi penataan rumah, bukan nasihat arsitek, teknik sipil, medis, hukum, atau keuangan.</li><li>Hasil tidak menjamin rezeki, kesehatan, atau hubungan tertentu. Keputusan besar seperti membeli, membangun, atau merenovasi rumah sebaiknya melibatkan tenaga ahli dan pertimbangan keluarga.</li><li>Aspek keselamatan (struktur, kelistrikan, drainase, sirkulasi udara) selalu lebih utama daripada saran Feng Shui.</li></ul></details>
+<details><summary>Penggunaan yang diperbolehkan</summary>
+<ul><li>Dipakai pribadi, dibagikan tautannya, atau dikutip singkat dengan menyebut sumber.</li><li>Dilarang menyajikan hasil sebagai klaim ilmiah, janji hasil, atau dasar menakut-nakuti orang lain.</li><li>Dilarang menyalin ulang seluruh halaman untuk dijual tanpa izin pembuatnya.</li></ul></details>
+<details><summary>Perubahan kebijakan</summary>
+<p>Isi halaman dan kebijakan ini dapat diperbarui sewaktu-waktu. Terakhir diperbarui: 28 November 2026.</p></details>
 </main>
+<div class="toast" id="toast" role="status"></div>
 
 <script>
 var D={
-"Utara":{u:"Air",c:[["Biru tua","#1f3f66"],["Biru muda","#9cc3e6"],["Abu muda","#d0d3d8"],["Putih","#f5f5f5"]],h:"Kuning tua, cokelat tanah pekat",t:"Logam (putih, abu) memperkuat unsur Air. Tambahkan elemen air seperti kolam kecil atau cermin."},
-"Timur Laut":{u:"Tanah",c:[["Terracotta","#c2674a"],["Krem","#efe3c8"],["Kuning lembut","#f0d98a"],["Cokelat muda","#b98d62"]],h:"Hijau tua pekat",t:"Merah muda dan terracotta menguatkan Tanah. Cocok untuk keramik, batu alam, dan tanaman pot tanah liat."},
-"Timur":{u:"Kayu",c:[["Hijau daun","#6aa56a"],["Hijau mint","#b7dcc0"],["Biru muda","#9cc3e6"],["Cokelat kayu","#a37a52"]],h:"Putih mengilap, abu logam",t:"Air (biru) menyuburkan Kayu. Perbanyak tanaman hidup dan furnitur kayu."},
-"Tenggara":{u:"Kayu",c:[["Hijau muda","#98c995"],["Teal","#4a9a98"],["Biru muda","#9cc3e6"],["Cokelat kayu","#a37a52"]],h:"Putih mengilap, abu logam",t:"Sama seperti Timur: Kayu dan Air saling mendukung. Cocok untuk taman depan yang rimbun."},
-"Selatan":{u:"Api",c:[["Terracotta","#c2674a"],["Oranye lembut","#eba26b"],["Merah muda","#e8a0a0"],["Hijau muda","#98c995"]],h:"Biru tua, hitam",t:"Kayu (hijau) memberi energi pada Api. Pakai merah dan oranye sebagai aksen, bukan seluruh dinding."},
-"Barat Daya":{u:"Tanah",c:[["Kuning lembut","#f0d98a"],["Krem","#efe3c8"],["Terracotta","#c2674a"],["Cokelat muda","#b98d62"]],h:"Hijau tua, biru tua",t:"Warna bumi menstabilkan rumah. Tambahkan keramik, batu, dan pot tanah liat."},
-"Barat":{u:"Logam",c:[["Abu muda","#d0d3d8"],["Putih","#f5f5f5"],["Terracotta","#c2674a"],["Krem","#efe3c8"]],h:"Merah menyala, oranye terang",t:"Tanah menghasilkan Logam, jadi terracotta dan krem sangat mendukung. Abu muda dan putih menguatkan unsur Logam. Aksen logam seperti gagang dan lampu berwarna emas atau perak cocok."},
-"Barat Laut":{u:"Logam",c:[["Abu muda","#d0d3d8"],["Putih","#f5f5f5"],["Emas lembut","#d9bf7a"],["Krem","#efe3c8"]],h:"Merah menyala, oranye terang",t:"Pakai nuansa netral dan elegan. Aksen logam di pintu dan pagar menguatkan energi."}
+"Utara":{u:"Air",c:[["Biru tua","#1f3f66"],["Biru muda","#9cc3e6"],["Abu muda","#d0d3d8"],["Putih","#f5f5f5"]],h:"Kuning tua, cokelat tanah pekat",t:"Logam (putih, abu) memperkuat unsur Air. Tambahkan elemen air seperti kolam kecil atau cermin.",b:"Karier &amp; jalan hidup",e:"Tenang, dalam, dan mengalir. Mendukung fokus dan refleksi, tetapi terasa dingin bila terlalu gelap.",r:"Cocok untuk ruang kerja, perpustakaan, dan ruang tenang. Pintu utama dengan teras terang membantu menyeimbangkan.",d:"Pancuran atau akuarium kecil, cermin, aksen logam putih.",x:"Tumpukan barang di teras, pintu gelap tanpa lampu, kompor sejajar lurus dengan pintu."},
+"Timur Laut":{u:"Tanah",c:[["Terracotta","#c2674a"],["Krem","#efe3c8"],["Kuning lembut","#f0d98a"],["Cokelat muda","#b98d62"]],h:"Hijau tua pekat",t:"Merah muda dan terracotta menguatkan Tanah. Cocok untuk keramik, batu alam, dan tanaman pot tanah liat.",b:"Ilmu &amp; pengembangan diri",e:"Tegas dan stabil, energi yang membangunkan semangat belajar.",r:"Cocok untuk ruang belajar, ruang baca, dan perpustakaan keluarga. Pintu utama sebaiknya kokoh dan rapi.",d:"Batu alam, keramik, kristal, lampu hangat.",x:"Toilet atau tempat sampah menghadap pintu, ruang gelap dan lembap."},
+"Timur":{u:"Kayu",c:[["Hijau daun","#6aa56a"],["Hijau mint","#b7dcc0"],["Biru muda","#9cc3e6"],["Cokelat kayu","#a37a52"]],h:"Putih mengilap, abu logam",t:"Air (biru) menyuburkan Kayu. Perbanyak tanaman hidup dan furnitur kayu.",b:"Keluarga &amp; kesehatan",e:"Energi pagi yang segar dan bertumbuh. Baik untuk rutinitas sehat.",r:"Cocok untuk teras berkebun, ruang keluarga, ruang sarapan, dan area olahraga ringan.",d:"Tanaman hidup yang sehat, kayu alami, gorden tipis agar cahaya pagi masuk.",x:"Tanaman layu atau artifisial berdebu, perabot logam berat yang menutup jendela pagi."},
+"Tenggara":{u:"Kayu",c:[["Hijau muda","#98c995"],["Teal","#4a9a98"],["Biru muda","#9cc3e6"],["Cokelat kayu","#a37a52"]],h:"Putih mengilap, abu logam",t:"Sama seperti Timur: Kayu dan Air saling mendukung. Cocok untuk taman depan yang rimbun.",b:"Kekayaan &amp; peluang",e:"Lembut dan mengalir seperti angin sepoi. Mendukung pertumbuhan usaha dan relasi.",r:"Cocok untuk taman depan, ruang kerja atau usaha, dan ruang tamu yang terang.",d:"Tanaman berdaun lebar, air mengalir kecil, ventilasi lancar.",x:"Pohon besar menutup pintu, selokan tersumbat, sampah menumpuk."},
+"Selatan":{u:"Api",c:[["Terracotta","#c2674a"],["Oranye lembut","#eba26b"],["Merah muda","#e8a0a0"],["Hijau muda","#98c995"]],h:"Biru tua, hitam",t:"Kayu (hijau) memberi energi pada Api. Pakai merah dan oranye sebagai aksen, bukan seluruh dinding.",b:"Reputasi &amp; semangat",e:"Hangat, terang, dan ekspresif. Mendukung pengakuan dan kepercayaan diri, tetapi mudah terasa panas.",r:"Cocok untuk ruang tamu, ruang tampil, studio, dan area sosial. Beri peneduh agar tidak terlalu terik.",d:"Pencahayaan hangat, karya atau penghargaan, aksen merah-oranye secukupnya.",x:"Panas tanpa naungan, warna merah menyala di seluruh dinding, kolam besar tepat di depan pintu."},
+"Barat Daya":{u:"Tanah",c:[["Kuning lembut","#f0d98a"],["Krem","#efe3c8"],["Terracotta","#c2674a"],["Cokelat muda","#b98d62"]],h:"Hijau tua, biru tua",t:"Warna bumi menstabilkan rumah. Tambahkan keramik, batu, dan pot tanah liat.",b:"Hubungan &amp; pernikahan",e:"Menopang, membumi, dan penuh perhatian. Mendukung keharmonisan keluarga.",r:"Cocok untuk kamar utama, ruang makan, dan ruang keluarga.",d:"Benda berpasangan, keramik, kristal, lampu kuning lembut.",x:"Kamar sempit dan gelap, toilet di sudut ini, tanaman berduri."},
+"Barat":{u:"Logam",c:[["Abu muda","#d0d3d8"],["Putih","#f5f5f5"],["Terracotta","#c2674a"],["Krem","#efe3c8"]],h:"Merah menyala, oranye terang",t:"Tanah menghasilkan Logam, jadi terracotta dan krem sangat mendukung. Abu muda dan putih menguatkan unsur Logam. Aksen logam seperti gagang dan lampu berwarna emas atau perak cocok.",b:"Kreativitas &amp; anak",e:"Teduh dan rapi di sore hari, estetis, cocok untuk ekspresi kreatif.",r:"Cocok untuk kamar anak, studio, dan ruang hobi. Beri peneduh untuk sinar sore.",d:"Ornamen logam, lonceng angin, pencahayaan sore yang diredam.",x:"Sinar sore langsung tanpa peneduh, barang rusak atau berkarat, dominasi warna api."},
+"Barat Laut":{u:"Logam",c:[["Abu muda","#d0d3d8"],["Putih","#f5f5f5"],["Emas lembut","#d9bf7a"],["Krem","#efe3c8"]],h:"Merah menyala, oranye terang",t:"Pakai nuansa netral dan elegan. Aksen logam di pintu dan pagar menguatkan energi.",b:"Mentor, bantuan &amp; perjalanan",e:"Berwibawa, tertib, dan mendukung kepemimpinan serta bantuan dari orang lain.",r:"Cocok untuk ruang kerja kepala keluarga, garasi, dan ruang tamu formal.",d:"Logam putih atau emas, bentuk bulat, penataan rapi.",x:"Toilet atau dapur di area ini, pagar atau pintu rusak, kabel kusut."}
 };
 var K={
 1:["Tenggara","Timur","Selatan","Utara"],3:["Selatan","Utara","Tenggara","Timur"],4:["Utara","Selatan","Timur","Tenggara"],9:["Timur","Tenggara","Utara","Selatan"],
 2:["Timur Laut","Barat","Barat Laut","Barat Daya"],6:["Barat","Timur Laut","Barat Daya","Barat Laut"],7:["Barat Laut","Barat Daya","Timur Laut","Barat"],8:["Barat Daya","Barat Laut","Barat","Timur Laut"]
 };
-var L=[["Sheng Qi","Rezeki &amp; kemakmuran"],["Tian Yi","Kesehatan"],["Yan Nian","Keharmonisan &amp; hubungan"],["Fu Wei","Ketenangan &amp; stabilitas"]];
-var sel=document.getElementById("arah"),out=document.getElementById("out");
+var KP={1:["Air","Adaptif, intuitif, reflektif"],2:["Tanah","Mengayomi, sabar, teliti"],3:["Kayu","Bertumbuh, inisiatif, ambisius"],4:["Kayu","Kreatif, komunikatif, halus"],6:["Logam","Berwibawa, disiplin, bertanggung jawab"],7:["Logam","Luwes, sosial, menikmati hidup"],8:["Tanah","Teguh, tekun, kuat menahan tekanan"],9:["Api","Ekspresif, visioner, bersemangat"]};
+var EL={"Kayu":["Air","Logam"],"Api":["Kayu","Air"],"Tanah":["Api","Kayu"],"Logam":["Tanah","Api"],"Air":["Logam","Tanah"]};
+var EW={"Kayu":"hijau, teal","Api":"merah, oranye","Tanah":"kuning, cokelat, terracotta","Logam":"putih, abu, emas","Air":"biru, hitam"};
+var L=[["Sheng Qi","Rezeki &amp; kemakmuran","Pintu utama, meja kerja atau usaha, arah hadap saat bekerja."],["Tian Yi","Kesehatan","Kamar tidur, area pemulihan, ruang ibadah."],["Yan Nian","Keharmonisan &amp; hubungan","Kamar utama, ruang makan, ruang keluarga."],["Fu Wei","Ketenangan &amp; stabilitas","Ruang baca, belajar, dan meditasi."]];
+var BD=[["Huo Hai","Gangguan ringan",[0]],["Liu Sha","Hambatan &amp; selisih paham",[0,2]],["Wu Gui","Gelisah &amp; kehilangan fokus",[1,2]],["Jue Ming","Paling kurang mendukung",[1]]];
+var TL={"Utara":[0,1,0],"Barat Daya":[0,0,0],"Timur":[1,0,0],"Tenggara":[0,1,1],"Barat Laut":[1,1,1],"Barat":[1,1,0],"Timur Laut":[0,0,1],"Selatan":[1,0,1]};
+function flip(d,idx){var l=TL[d].slice();idx.forEach(function(i){l[i]=1-l[i]});var r="";Object.keys(TL).forEach(function(k){if(TL[k].join()===l.join())r=k});return r}
+var sel=document.getElementById("arah"),rmh=document.getElementById("rmh"),out=document.getElementById("out"),toast=document.getElementById("toast");
 Object.keys(D).forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=k;if(k==="Barat")o.selected=true;sel.appendChild(o)});
+var o0=document.createElement("option");o0.value="";o0.textContent="Lewati / belum tahu";rmh.appendChild(o0);
+Object.keys(D).forEach(function(k){var o=document.createElement("option");o.value=k;o.textContent=k;rmh.appendChild(o)});
+var shareText="Cek warna cat dan arah hadap rumah terbaik menurut Feng Shui.";
 
 function chips(a){return '<div class="chips">'+a.map(function(c){return '<span class="chip"><i style="background:'+c[1]+'"></i>'+c[0]+'</span>'}).join("")+'</div>'}
+function kv(t,v){return '<div class="kv"><b>'+t+'</b>'+v+'</div>'}
 function warna(k){
-var d=D[k];
-return '<div class="card"><h2>Rumah hadap '+k+'</h2><small>Unsur: '+d.u+'</small>'+
+var d=D[k],e=EL[d.u];
+shareText="Rumah hadap "+k+" (unsur "+d.u+"). Warna cat disarankan: "+d.c.map(function(c){return c[0]}).join(", ")+". Area hidup: "+d.b.replace(/&amp;/g,"&")+".";
+return '<div class="card"><h2>Rumah hadap '+k+'</h2><small>Unsur: '+d.u+' · Area Bagua: '+d.b+'</small>'+
+kv("Karakter energi",d.e)+
 '<h3 class="ok">✔ Warna cat yang disarankan</h3>'+chips(d.c)+
 '<h3 class="no">✘ Sebaiknya dihindari</h3><div>'+d.h+'</div>'+
-'<h3>💡 Tips</h3><div>'+d.t+'</div></div>';
+'<h3>⚖️ Keseimbangan unsur</h3><div>Unsur '+d.u+' didukung oleh <b>'+e[0]+'</b> ('+EW[e[0]]+') dan dikendalikan oleh <b>'+e[1]+'</b> ('+EW[e[1]]+'). Pakai warna pendukung sebagai warna utama; warna pengendali cukup sebagai aksen kecil.</div>'+
+kv("🚪 Ruang &amp; pintu utama",d.r)+kv("🪴 Dekorasi &amp; elemen",d.d)+kv("⚠️ Perlu diwaspadai",d.x)+
+'<div class="box">💡 '+d.t+'<br><small>Komposisi mudah: 60% warna dasar, 30% pendamping, 10% aksen.</small></div></div>';
 }
 function rd(n){while(n>9){n=String(n).split("").reduce(function(a,b){return a+ +b},0)}return n}
 function showWarna(){out.innerHTML=warna(sel.value)}
 function hitung(){
-var y=parseInt(document.getElementById("thn").value,10),g=document.getElementById("gen").value;
+var y=parseInt(document.getElementById("thn").value,10),g=document.getElementById("gen").value,rm=rmh.value;
 if(!y||y<1900||y>2100){out.innerHTML='<div class="card">Masukkan tahun lahir yang valid.</div>';return}
 var s=rd(y),k;
 if(y<2000){k=g==="L"?rd(11-s):rd(s+4)}else{k=g==="L"?rd(9-s):rd(s+6)}
 if(k===0)k=9;
 if(k===5)k=(g==="L")?2:8;
 var grup=[1,3,4,9].indexOf(k)>-1?"Grup Timur":"Grup Barat";
-var a=K[k];
-var h='<div class="card"><h2>Angka Kua kamu: '+k+'</h2><small>'+grup+'</small><h3>Arah hadap terbaik</h3><div class="dir">';
-for(var i=0;i<4;i++){h+='<div><b>'+a[i]+'</b>'+L[i][0]+'<br><small>'+L[i][1]+'</small></div>'}
-h+='</div><p class="note">Urutan dari terbaik: '+a[0]+' lalu '+a[1]+', '+a[2]+', '+a[3]+'. Ketuk arah di bawah untuk melihat saran warna cat.</p>';
-h+='<div class="chips">'+a.map(function(x){return '<button class="chip" type="button" data-d="'+x+'" style="background:var(--bg);color:var(--tx);cursor:pointer">'+x+'</button>'}).join("")+'</div></div><div id="det"></div>';
+var a=K[k],p=KP[k],fw=a[3];
+var h='<div class="card"><h2>Angka Kua kamu: '+k+'</h2><small>'+grup+' · Unsur '+p[0]+'</small>'+
+kv("Kecenderungan watak (tradisi)",p[1])+
+'<h3 class="ok">✔ Empat arah pendukung</h3><div class="dir">';
+for(var i=0;i<4;i++){h+='<div><b>'+(i+1)+'. '+a[i]+'</b>'+L[i][0]+' · <small>'+L[i][1]+'</small><br><small>'+L[i][2]+'</small></div>'}
+h+='</div><h3 class="no">✘ Empat arah kurang mendukung</h3><div class="dir bad">';
+var bl=[];
+for(var j=0;j<4;j++){var bd=flip(fw,BD[j][2]);bl.push(bd);h+='<div><b>'+bd+'</b>'+BD[j][0]+' · <small>'+BD[j][1]+'</small></div>'}
+h+='</div><p class="note">Arah kurang mendukung bukan berarti berbahaya. Tradisi menyarankan memakainya untuk fungsi pendukung seperti gudang, toilet, tangga, atau garasi.</p>';
+h+='<h3>🏠 Panduan penempatan</h3><ul><li>Pintu utama dan meja kerja: usahakan menghadap '+a[0]+' atau '+a[1]+'.</li><li>Kepala tempat tidur: arah '+a[1]+' atau '+a[3]+' untuk istirahat lebih tenang.</li><li>Saat memasak: menghadap '+a[2]+' atau '+a[0]+'.</li><li>Rumah dihuni bersama: cari kompromi. Prioritaskan arah milik pencari nafkah untuk pintu utama, lalu tiap anggota menata kamar dan meja sendiri.</li></ul>';
+if(rm){
+var ix=a.indexOf(rm),bi=bl.indexOf(rm),tx;
+if(ix>-1)tx='Rumah hadap <b>'+rm+'</b> termasuk arah pendukung peringkat '+(ix+1)+' dari 4 ('+L[ix][0]+', '+L[ix][1]+'). Selaras dengan angka Kua kamu.';
+else if(bi>-1)tx='Rumah hadap <b>'+rm+'</b> termasuk arah kurang mendukung ('+BD[bi][0]+') untuk Kua kamu. Imbangi dengan pintu dan meja kerja ke arah '+a[0]+', pencahayaan baik, serta warna sesuai unsur arah hadapnya.';
+else tx='Rumah hadap <b>'+rm+'</b> bersifat netral untuk Kua kamu.';
+h+='<div class="box"><b>Kecocokan dengan rumahmu:</b> '+tx+'</div>';
+}
+h+='<p class="note">Ketuk arah di bawah untuk melihat analisa warna cat dan tata ruangnya.</p><div class="chips">'+a.concat(bl).filter(function(v,i,r){return r.indexOf(v)===i}).map(function(x){return '<button class="chip" type="button" data-d="'+x+'" style="background:var(--bg);color:var(--tx);cursor:pointer">'+x+'</button>'}).join("")+'</div></div><div id="det"></div>';
+shareText="Angka Kua saya "+k+" ("+grup+"). Arah terbaik: "+a[0]+", lalu "+a[1]+", "+a[2]+", "+a[3]+".";
 out.innerHTML=h;
-Array.prototype.forEach.call(out.querySelectorAll("[data-d]"),function(b){b.addEventListener("click",function(){document.getElementById("det").innerHTML=warna(b.getAttribute("data-d"))})});
+Array.prototype.forEach.call(out.querySelectorAll("[data-d]"),function(b){b.addEventListener("click",function(){var t=shareText;document.getElementById("det").innerHTML=warna(b.getAttribute("data-d"));shareText=t})});
 }
 function tab(n){
 document.getElementById("p1").classList.toggle("hide",n!==1);
@@ -112,7 +193,20 @@ document.getElementById("p2").classList.toggle("hide",n!==2);
 document.getElementById("t1").classList.toggle("on",n===1);
 document.getElementById("t2").classList.toggle("on",n===2);
 out.innerHTML="";
+shareText="Cek warna cat dan arah hadap rumah terbaik menurut Feng Shui.";
 }
+function say(m){toast.textContent=m;toast.classList.add("on");setTimeout(function(){toast.classList.remove("on")},1800)}
+function copyTxt(t){
+try{if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(t).then(function(){say("Tersalin")},function(){fb(t)})}}catch(e){}
+fb(t)}
+function fb(t){var x=document.createElement("textarea");x.value=t;x.style.position="fixed";x.style.opacity="0";document.body.appendChild(x);x.select();try{document.execCommand("copy");say("Tersalin")}catch(e){say("Gagal menyalin")}document.body.removeChild(x)}
+function doShare(m){
+var url=location.href.split("#")[0],full=shareText+" "+url;
+if(m==="wa"){window.open("https://wa.me/?text="+encodeURIComponent(full),"_blank","noopener");return}
+if(m==="copy"){copyTxt(full);return}
+if(navigator.share){navigator.share({title:document.title,text:shareText,url:url}).catch(function(){})}else{copyTxt(full)}
+}
+Array.prototype.forEach.call(document.querySelectorAll("[data-sh]"),function(b){b.addEventListener("click",function(){doShare(b.getAttribute("data-sh"))})});
 document.getElementById("go1").addEventListener("click",showWarna);
 document.getElementById("go2").addEventListener("click",hitung);
 document.getElementById("t1").addEventListener("click",function(){tab(1)});
