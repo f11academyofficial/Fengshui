@@ -44,6 +44,7 @@ details{background:var(--card);border:1px solid var(--bd);border-radius:12px;pad
 summary{cursor:pointer;font-weight:600;font-size:.95rem}
 details p,details li{font-size:.9rem;color:var(--tx)}
 h2.sec{margin:22px 0 10px}
+.ban{display:block;margin:26px auto 0;max-width:728px}.ban img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--bd)}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:.88rem;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.on{opacity:1}
 </style>
@@ -69,6 +70,10 @@ h2.sec{margin:22px 0 10px}
 <input id="thn" type="number" inputmode="numeric" min="1900" max="2100" placeholder="contoh: 1985">
 <label for="gen">Jenis kelamin (dipakai untuk rumus Kua)</label>
 <select id="gen"><option value="L">Laki-laki</option><option value="P">Perempuan</option></select>
+<label for="thn2">Tahun lahir pasangan (opsional, untuk suami istri)</label>
+<input id="thn2" type="number" inputmode="numeric" min="1900" max="2100" placeholder="contoh: 1988">
+<label for="gen2">Jenis kelamin pasangan</label>
+<select id="gen2"><option value="P">Perempuan</option><option value="L">Laki-laki</option></select>
 <label for="rmh">Arah hadap rumah saat ini (opsional)</label>
 <select id="rmh"></select>
 <button class="go" id="go2" type="button">Hitung arah terbaik</button>
@@ -111,6 +116,7 @@ h2.sec{margin:22px 0 10px}
 <ul><li>Dipakai pribadi, dibagikan tautannya, atau dikutip singkat dengan menyebut sumber.</li><li>Dilarang menyajikan hasil sebagai klaim ilmiah, janji hasil, atau dasar menakut-nakuti orang lain.</li><li>Dilarang menyalin ulang seluruh halaman untuk dijual tanpa izin pembuatnya.</li></ul></details>
 <details><summary>Perubahan kebijakan</summary>
 <p>Isi halaman dan kebijakan ini dapat diperbarui sewaktu-waktu. Terakhir diperbarui: 28 November 2026.</p></details>
+<a class="ban" href="https://f11academyofficial.github.io/Analisa/" target="_blank" rel="noopener"><img src="banner.gif" width="728" height="90" alt="F11 Academy: Bedah Namamu, Petakan Potensimu. Coba sekarang, gratis"></a>
 </main>
 <div class="toast" id="toast" role="status"></div>
 
@@ -157,13 +163,34 @@ kv("🚪 Ruang &amp; pintu utama",d.r)+kv("🪴 Dekorasi &amp; elemen",d.d)+kv("
 }
 function rd(n){while(n>9){n=String(n).split("").reduce(function(a,b){return a+ +b},0)}return n}
 function showWarna(){out.innerHTML=warna(sel.value)}
-function hitung(){
-var y=parseInt(document.getElementById("thn").value,10),g=document.getElementById("gen").value,rm=rmh.value;
-if(!y||y<1900||y>2100){out.innerHTML='<div class="card">Masukkan tahun lahir yang valid.</div>';return}
+function kua(y,g){
 var s=rd(y),k;
 if(y<2000){k=g==="L"?rd(11-s):rd(s+4)}else{k=g==="L"?rd(9-s):rd(s+6)}
 if(k===0)k=9;
 if(k===5)k=(g==="L")?2:8;
+return k}
+function bads(k){return BD.map(function(b){return flip(K[k][3],b[2])})}
+function lab(k,d){var i=K[k].indexOf(d);return i>-1?L[i][0]:BD[bads(k).indexOf(d)][0]}
+function pair(k1,k2,rm){
+var sc={},g1=[1,3,4,9].indexOf(k1)>-1,g2=[1,3,4,9].indexOf(k2)>-1;
+[k1,k2].forEach(function(k){K[k].forEach(function(d,i){sc[d]=(sc[d]||0)+4-i});bads(k).forEach(function(d,i){sc[d]=(sc[d]||0)-i-1})});
+var r=Object.keys(sc).sort(function(a,b){return sc[b]-sc[a]});
+var h='<div class="card"><h2>👫 Analisa suami istri</h2><small>Kua '+k1+' ('+(g1?"Grup Timur":"Grup Barat")+') dan Kua '+k2+' ('+(g2?"Grup Timur":"Grup Barat")+')</small>';
+h+='<div class="box">'+(g1===g2?'Kalian satu grup, jadi empat arah baik sama. Yang berbeda hanya urutan prioritasnya, dan skor gabungan di bawah membantu memilih arah terbaik untuk berdua.':'Kalian beda grup (Timur dan Barat), sehingga tidak ada arah yang baik untuk keduanya sekaligus. Ini umum terjadi. Pilih arah dengan skor gabungan tertinggi untuk pintu utama, lalu atur kamar tidur, meja kerja, dan posisi memasak sesuai arah baik masing-masing.')+'</div>';
+h+='<h3 class="ok">✔ Arah hadap paling seimbang</h3><div class="dir">';
+r.slice(0,4).forEach(function(d,i){h+='<div><b>'+(i+1)+'. '+d+'</b>Skor '+(sc[d]>0?"+":"")+sc[d]+'<br><small>Kamu: '+lab(k1,d)+'<br>Pasangan: '+lab(k2,d)+'</small></div>'});
+h+='</div><h3 class="no">✘ Paling kurang seimbang</h3><div class="dir bad">';
+r.slice(-2).forEach(function(d){h+='<div><b>'+d+'</b>Skor '+sc[d]+'<br><small>Kamu: '+lab(k1,d)+'<br>Pasangan: '+lab(k2,d)+'</small></div>'});
+h+='</div>';
+if(rm)h+='<div class="box"><b>Rumahmu hadap '+rm+':</b> skor gabungan '+(sc[rm]>0?"+":"")+sc[rm]+' (kamu: '+lab(k1,rm)+', pasangan: '+lab(k2,rm)+'). '+(sc[rm]>=r[2]?'Termasuk kombinasi yang baik untuk berdua.':'Imbangi lewat penataan dalam rumah dan warna cat sesuai unsur arah hadapnya.')+'</div>';
+h+='<h3>🛏️ Penataan di dalam rumah</h3><ul><li>Tempat tidur: kepala ke arah baik bersama, atau masing-masing menyesuaikan sisi tidurnya jika memungkinkan.</li><li>Meja kerja: masing-masing menghadap Sheng Qi pribadi ('+K[k1][0]+' untuk kamu, '+K[k2][0]+' untuk pasangan).</li><li>Dapur: yang paling sering memasak memakai arah baik miliknya saat berdiri di depan kompor.</li></ul><p class="note">Skor: arah baik bernilai +4 sampai +1, arah kurang mendukung -1 sampai -4, lalu dijumlahkan untuk kedua orang. Ini alat bantu sederhana, bukan hitungan baku tradisi.</p></div>';
+return h}
+function hitung(){
+var y=parseInt(document.getElementById("thn").value,10),g=document.getElementById("gen").value,rm=rmh.value;
+if(!y||y<1900||y>2100){out.innerHTML='<div class="card">Masukkan tahun lahir yang valid.</div>';return}
+var k=kua(y,g);
+var y2=parseInt(document.getElementById("thn2").value,10),g2=document.getElementById("gen2").value,k2=0;
+if(document.getElementById("thn2").value!==""){if(!y2||y2<1900||y2>2100){out.innerHTML='<div class="card">Tahun lahir pasangan tidak valid.</div>';return}k2=kua(y2,g2)}
 var grup=[1,3,4,9].indexOf(k)>-1?"Grup Timur":"Grup Barat";
 var a=K[k],p=KP[k],fw=a[3];
 var h='<div class="card"><h2>Angka Kua kamu: '+k+'</h2><small>'+grup+' · Unsur '+p[0]+'</small>'+
@@ -183,7 +210,10 @@ else tx='Rumah hadap <b>'+rm+'</b> bersifat netral untuk Kua kamu.';
 h+='<div class="box"><b>Kecocokan dengan rumahmu:</b> '+tx+'</div>';
 }
 h+='<p class="note">Ketuk arah di bawah untuk melihat analisa warna cat dan tata ruangnya.</p><div class="chips">'+a.concat(bl).filter(function(v,i,r){return r.indexOf(v)===i}).map(function(x){return '<button class="chip" type="button" data-d="'+x+'" style="background:var(--bg);color:var(--tx);cursor:pointer">'+x+'</button>'}).join("")+'</div></div><div id="det"></div>';
-shareText="Angka Kua saya "+k+" ("+grup+"). Arah terbaik: "+a[0]+", lalu "+a[1]+", "+a[2]+", "+a[3]+".";
+if(k2){var a2=K[k2],cp='<div class="card"><h2>Pasangan: Kua '+k2+'</h2><small>'+([1,3,4,9].indexOf(k2)>-1?"Grup Timur":"Grup Barat")+' · Unsur '+KP[k2][0]+'</small>'+kv("Kecenderungan watak (tradisi)",KP[k2][1])+'<h3 class="ok">✔ Empat arah pendukung</h3><div class="dir">';
+for(var q=0;q<4;q++){cp+='<div><b>'+(q+1)+'. '+a2[q]+'</b>'+L[q][0]+' · <small>'+L[q][1]+'</small></div>'}
+cp+='</div></div>'+pair(k,k2,rm);h=h.replace('<div id="det"></div>',cp+'<div id="det"></div>')}
+shareText="Angka Kua saya "+k+" ("+grup+"). Arah terbaik: "+a[0]+", lalu "+a[1]+", "+a[2]+", "+a[3]+"."+(k2?" Untuk suami istri, cek juga arah hadap yang seimbang.":"");
 out.innerHTML=h;
 Array.prototype.forEach.call(out.querySelectorAll("[data-d]"),function(b){b.addEventListener("click",function(){var t=shareText;document.getElementById("det").innerHTML=warna(b.getAttribute("data-d"));shareText=t})});
 }
@@ -208,6 +238,7 @@ if(navigator.share){navigator.share({title:document.title,text:shareText,url:url
 }
 Array.prototype.forEach.call(document.querySelectorAll("[data-sh]"),function(b){b.addEventListener("click",function(){doShare(b.getAttribute("data-sh"))})});
 document.getElementById("go1").addEventListener("click",showWarna);
+document.getElementById("gen").addEventListener("change",function(){document.getElementById("gen2").value=this.value==="L"?"P":"L"});
 document.getElementById("go2").addEventListener("click",hitung);
 document.getElementById("t1").addEventListener("click",function(){tab(1)});
 document.getElementById("t2").addEventListener("click",function(){tab(2)});
